@@ -1,0 +1,62 @@
+---
+import sobre from '../assets/sobre.webp';
+import logoLight from '../assets/logolight.svg';
+---
+
+<section id="sobre" class="bg-background scroll-mt-20 flex items-center min-h-[90vh] py-20 border-t border-surface/30">
+  <div class="container mx-auto px-4 h-full flex items-center">
+    
+    <div class="flex flex-col lg:flex-row gap-16 lg:gap-24 items-start w-full">
+        
+        <div class="lg:w-2/3 relative clearfix">
+           <h2 class="font-serif text-3xl md:text-5xl font-bold text-foreground mb-10 tracking-tight uppercase">
+            Minha <span class="text-primary italic lowercase">Jornada</span>
+          </h2>
+
+          <img
+            src={sobre.src}
+            alt="Foto de Amaro Netto"
+            width={sobre.width}
+            height={sobre.height}
+            class="hidden lg:block lg:float-right w-auto object-contain object-bottom lg:ml-8 lg:-mr-32 lg:-mb-20 z-10 relative drop-shadow-2xl lg:h-[700px] xl:h-[850px]"
+            style="shape-outside: url('/src/assets/sobre.webp'); shape-margin: 3rem;"
+            loading="lazy"
+          />
+          
+          <div class="text-foreground/80 leading-relaxed text-lg text-justify font-sans relative z-20 space-y-6">
+            <p>
+              Com mais de 10 anos de experiência imersiva em tecnologia, construí uma carreira sólida 
+              que combina o rigor do desenvolvimento back-end, a criatividade do design de interfaces e a visão estratégica da liderança técnica. 
+            </p>
+            <p>
+              Minha paixão não é apenas codificar, mas transformar desafios de negócios complexos em soluções digitais elegantes, performáticas e, acima de tudo, que geram impacto real e mensurável para as organizações.
+            </p>
+            <p>
+              Especializo-me em criar ecossistemas digitais que não apenas funcionam perfeitamente sob o capô, 
+              mas também encantam os usuários na superfície. Acredito firmemente que a tecnologia, quando bem aplicada, deve ser uma ponte intuitiva e poderosa entre pessoas, processos e novas possibilidades.
+            </p>
+          </div>
+        </div>
+
+        <div class="lg:w-1/3 flex flex-col justify-center items-center text-center p-10 bg-surface/10 rounded-2xl border border-surface/50 hover:border-primary/20 transition-all duration-500 shadow-sm sticky top-32 z-0">
+            <div class="mb-8 p-6 bg-primary/5 rounded-full">
+                <img 
+                    src={logoLight.src} 
+                    alt="Amaro Netto Soluções Logo" 
+                    width={logoLight.width}
+                    height={logoLight.height}
+                    class="h-24 w-24 md:h-28 md:w-28 object-contain opacity-90 brightness-0" 
+                    loading="lazy"
+                />
+            </div>
+            <h3 class="font-serif text-2xl md:text-3xl font-bold text-foreground mb-6 leading-tight uppercase">
+                Amaro Netto <br/><span class="text-primary italic capitalize">Soluções</span>
+            </h3>
+            <p class="text-foreground/70 text-base leading-relaxed font-sans">
+                Consultoria boutique especializada em Tecnologia da Informação. Unimos infraestrutura robusta, segurança de dados e desenvolvimento sob medida para entregar inovação estratégica e eficiência operacional para o seu negócio.
+            </p>
+        </div>
+    </div>
+
+  </div>
+</section>
