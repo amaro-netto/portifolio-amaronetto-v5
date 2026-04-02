@@ -1,0 +1,128 @@
+---
+const navItems = [
+  { id: 'inicio', label: 'Início' },
+  { id: 'sobre', label: 'Sobre' },
+  { id: 'servicos', label: 'Serviços' },
+  { id: 'experiencia', label: 'Carreira' },
+  { id: 'portfolio', label: 'Portfólio' },
+  { id: 'artigos', label: 'Tech Notes' },
+  { id: 'contato', label: 'Contato' },
+];
+---
+
+<header id="main-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-transparent bg-transparent py-5">
+  <div class="container mx-auto px-4">
+    <nav class="flex items-center justify-between">
+      
+      <a href="#inicio" class="flex items-center gap-2 group outline-none focus-visible:ring-2 focus-visible:ring-primary rounded" aria-label="Ir para o início">
+        <span class="font-serif text-2xl font-bold text-foreground group-hover:text-primary transition-colors">
+          Amaro<span class="text-primary italic font-medium">Netto</span>
+        </span>
+      </a>
+
+      <div class="hidden lg:flex items-center gap-8">
+        {navItems.map(item => (
+          <a 
+            href={`#${item.id}`} 
+            class="font-sans text-xs font-bold uppercase tracking-widest text-foreground/70 hover:text-primary transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary rounded py-1"
+          >
+            {item.label}
+          </a>
+        ))}
+      </div>
+
+      <button 
+        id="mobile-menu-toggle" 
+        class="lg:hidden p-2 text-foreground hover:text-primary outline-none focus-visible:ring-2 focus-visible:ring-primary rounded transition-colors"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        aria-label="Abrir menu de navegação"
+      >
+        <svg id="icon-menu" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="block transition-transform duration-300">
+          <line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/>
+        </svg>
+        <svg id="icon-close" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="hidden transition-transform duration-300">
+          <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
+        </svg>
+      </button>
+
+    </nav>
+  </div>
+
+  <div id="mobile-menu" class="absolute left-0 right-0 top-full bg-background border-b border-surface shadow-xl hidden flex-col lg:hidden z-40 transition-all duration-300 origin-top opacity-0 transform -translate-y-2">
+    <div class="container mx-auto px-4 py-6 flex flex-col gap-2">
+      {navItems.map(item => (
+        <a 
+          href={`#${item.id}`} 
+          class="mobile-link font-sans text-sm font-bold uppercase tracking-widest text-foreground/80 hover:text-primary hover:bg-surface/30 transition-all p-4 rounded-md border-b border-surface/50 last:border-0"
+        >
+          {item.label}
+        </a>
+      ))}
+    </div>
+  </div>
+</header>
+
+<script>
+  // Vanilla JS - O Astro processa isso no build e entrega puro no navegador
+  document.addEventListener('DOMContentLoaded', () => {
+    const header = document.getElementById('main-header');
+    const toggleBtn = document.getElementById('mobile-menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const iconMenu = document.getElementById('icon-menu');
+    const iconClose = document.getElementById('icon-close');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
+
+    let isMenuOpen = false;
+
+    // Lógica para mudar estilo do header ao rolar a página
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        header?.classList.add('bg-background/95', 'backdrop-blur-md', 'shadow-sm', 'border-surface', 'py-4');
+        header?.classList.remove('bg-transparent', 'border-transparent', 'py-5');
+      } else {
+        header?.classList.add('bg-transparent', 'border-transparent', 'py-5');
+        header?.classList.remove('bg-background/95', 'backdrop-blur-md', 'shadow-sm', 'border-surface', 'py-4');
+      }
+    };
+
+    // Lógica para abrir/fechar o menu mobile
+    const toggleMenu = () => {
+      isMenuOpen = !isMenuOpen;
+      toggleBtn?.setAttribute('aria-expanded', isMenuOpen.toString());
+      
+      if (isMenuOpen) {
+        mobileMenu?.classList.remove('hidden');
+        // Pequeno delay para a animação do Tailwind funcionar
+        setTimeout(() => {
+          mobileMenu?.classList.remove('-translate-y-2', 'opacity-0');
+        }, 10);
+        iconMenu?.classList.add('hidden');
+        iconClose?.classList.remove('hidden');
+        header?.classList.add('bg-background'); 
+      } else {
+        mobileMenu?.classList.add('-translate-y-2', 'opacity-0');
+        setTimeout(() => {
+          mobileMenu?.classList.add('hidden');
+        }, 300); // Tempo da transição
+        iconMenu?.classList.remove('hidden');
+        iconClose?.classList.add('hidden');
+        handleScroll(); // Restaura o fundo do header baseado na rolagem
+      }
+    };
+
+    // Eventos
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    toggleBtn?.addEventListener('click', toggleMenu);
+    
+    // Fecha o menu ao clicar num link
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        if (isMenuOpen) toggleMenu();
+      });
+    });
+
+    // Inicia a verificação de scroll
+    handleScroll();
+  });
+</script>
