@@ -1,35 +1,38 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-import { SkipLink } from '@/components/SkipLink';
-import Header from '@/components/Header';
-import HeroSection from '@/components/HeroSection';
-import AboutSection from '@/components/AboutSection';
-import ExperienceSection from '@/components/ExperienceSection';
-import PortfolioSection from '@/components/PortfolioSection';
-import ArticlesSection from '@/components/ArticlesSection';
-import ContactSection from '@/components/ContactSection';
-// ADICIONE A IMPORTAÇÃO DO TOASTER DO SHADCN AQUI:
-import { Toaster } from '@/components/ui/toaster'; 
+import Header from '../components/Header.astro';
+import HeroSection from '../components/HeroSection.astro';
+import AboutSection from '../components/AboutSection.astro';
+import ServicesSection from '../components/ServicesSection.astro';
+import ExperienceSection from '../components/ExperienceSection.astro';
+import PortfolioSection from '../components/PortfolioSection.astro';
+import ArticlesSection from '../components/ArticlesSection.astro';
+import ContactSection from '../components/ContactSection.astro';
 ---
 
 <Layout 
-    title="Amaro Netto | Soluções em Tecnologia"
-    description="Profissional de TI e Designer especializado em soluções tecnológicas."
+    title="Amaro Netto | Soluções em Tecnologia Boutique"
+    description="Consultoria boutique em Tecnologia da Informação. Desenvolvimento de software sob medida, UX/UI Corporativo, Infraestrutura Cloud e Liderança Técnica."
 >
-    <div class="min-h-screen">
-        <SkipLink client:load />
-        <Header client:load />
-        
-        <main id="main-content" tabindex="-1" class="focus:outline-none">
-            <HeroSection client:load />
-            <AboutSection client:visible />
-            <ExperienceSection client:visible />
-            <PortfolioSection client:visible />
-            <ArticlesSection client:visible />
-            <ContactSection client:visible />
-        </main>
+    <div class="relative w-full">
+        <a 
+            href="#main-content" 
+            class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 z-[110] bg-primary text-white px-6 py-3 rounded-sm font-bold font-sans tracking-widest uppercase shadow-xl"
+        >
+            Pular para o conteúdo principal
+        </a>
 
-        <Toaster client:load />
+        <Header />
+        
+        <main id="main-content" tabindex="-1" class="focus:outline-none flex flex-col w-full overflow-hidden">
+            <HeroSection />
+            <AboutSection />
+            <ServicesSection />
+            <ExperienceSection />
+            <PortfolioSection />
+            <ArticlesSection />
+            <ContactSection />
+        </main>
     </div>
 </Layout>
